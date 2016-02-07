@@ -13,6 +13,9 @@
 		5455811D1C663A82005E95E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5455811B1C663A82005E95E3 /* Main.storyboard */; };
 		545581281C663A82005E95E3 /* MKO_projectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581271C663A82005E95E3 /* MKO_projectTests.swift */; };
 		545581331C663A82005E95E3 /* MKO_projectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581321C663A82005E95E3 /* MKO_projectUITests.swift */; };
+		545581411C66425F005E95E3 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 545581401C66425F005E95E3 /* config */; };
+		545581431C664267005E95E3 /* NWSU.sh in Resources */ = {isa = PBXBuildFile; fileRef = 545581421C664267005E95E3 /* NWSU.sh */; };
+		545581451C6643F0005E95E3 /* Classes and extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581441C6643F0005E95E3 /* Classes and extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		5455812E1C663A82005E95E3 /* MKO projectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MKO projectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		545581321C663A82005E95E3 /* MKO_projectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKO_projectUITests.swift; sourceTree = "<group>"; };
 		545581341C663A82005E95E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		545581401C66425F005E95E3 /* config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
+		545581421C664267005E95E3 /* NWSU.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = NWSU.sh; sourceTree = "<group>"; };
+		545581441C6643F0005E95E3 /* Classes and extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Classes and extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +103,11 @@
 			children = (
 				545581151C663A82005E95E3 /* AppDelegate.swift */,
 				545581171C663A82005E95E3 /* ViewController.swift */,
+				545581441C6643F0005E95E3 /* Classes and extensions.swift */,
 				545581191C663A82005E95E3 /* Assets.xcassets */,
 				5455811B1C663A82005E95E3 /* Main.storyboard */,
+				545581401C66425F005E95E3 /* config */,
+				545581421C664267005E95E3 /* NWSU.sh */,
 				5455811E1C663A82005E95E3 /* Info.plist */,
 			);
 			path = "MKO project";
@@ -227,6 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5455811A1C663A82005E95E3 /* Assets.xcassets in Resources */,
+				545581431C664267005E95E3 /* NWSU.sh in Resources */,
+				545581411C66425F005E95E3 /* config in Resources */,
 				5455811D1C663A82005E95E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				545581181C663A82005E95E3 /* ViewController.swift in Sources */,
+				545581451C6643F0005E95E3 /* Classes and extensions.swift in Sources */,
 				545581161C663A82005E95E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

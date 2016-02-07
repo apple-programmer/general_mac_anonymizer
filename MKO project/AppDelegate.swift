@@ -14,13 +14,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
+        getPassword()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+        runCommand(command: "rm .pw.sh")
+        NSUserDefaults.standardUserDefaults().setNilValueForKey("UserPassword")
     }
 
 
 }
+
+let askpass = "export SUDO_ASKPASS=.pw.sh ; SUDO_ASKPASS=.pw.sh ;"
 
