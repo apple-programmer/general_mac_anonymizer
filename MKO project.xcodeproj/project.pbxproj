@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05BAF02B08D2CECC7B256557 /* Pods_MKO_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */; };
 		545581161C663A82005E95E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581151C663A82005E95E3 /* AppDelegate.swift */; };
 		545581181C663A82005E95E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581171C663A82005E95E3 /* ViewController.swift */; };
 		5455811A1C663A82005E95E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 545581191C663A82005E95E3 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12D660EF52BE2A14E140DBAF /* Pods-MKO project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKO project.release.xcconfig"; path = "Pods/Target Support Files/Pods-MKO project/Pods-MKO project.release.xcconfig"; sourceTree = "<group>"; };
 		545581121C663A82005E95E3 /* MKO project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MKO project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		545581151C663A82005E95E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		545581171C663A82005E95E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		545581401C66425F005E95E3 /* config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
 		545581421C664267005E95E3 /* NWSU.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = NWSU.sh; sourceTree = "<group>"; };
 		545581441C6643F0005E95E3 /* Classes and extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Classes and extensions.swift"; sourceTree = "<group>"; };
+		80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MKO_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEEB74717200EE9C02F7FBEE /* Pods-MKO project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKO project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MKO project/Pods-MKO project.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BAF02B08D2CECC7B256557 /* Pods_MKO_project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CB66E23C0AB6F3386C43941 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BEEB74717200EE9C02F7FBEE /* Pods-MKO project.debug.xcconfig */,
+				12D660EF52BE2A14E140DBAF /* Pods-MKO project.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		545581091C663A82005E95E3 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +99,8 @@
 				545581261C663A82005E95E3 /* MKO projectTests */,
 				545581311C663A82005E95E3 /* MKO projectUITests */,
 				545581131C663A82005E95E3 /* Products */,
+				0CB66E23C0AB6F3386C43941 /* Pods */,
+				8BDB2D6FCFD7451CB9E02CE7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +147,14 @@
 			path = "MKO projectUITests";
 			sourceTree = "<group>";
 		};
+		8BDB2D6FCFD7451CB9E02CE7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,9 +162,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 545581371C663A82005E95E3 /* Build configuration list for PBXNativeTarget "MKO project" */;
 			buildPhases = (
+				9BE25AD836B56784F26570EC /* Check Pods Manifest.lock */,
 				5455810E1C663A82005E95E3 /* Sources */,
 				5455810F1C663A82005E95E3 /* Frameworks */,
 				545581101C663A82005E95E3 /* Resources */,
+				937E0F2FF304C269FF4BFF42 /* Embed Pods Frameworks */,
+				CE5B3DF131E6205F34E63E42 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,6 +284,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		937E0F2FF304C269FF4BFF42 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MKO project/Pods-MKO project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BE25AD836B56784F26570EC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CE5B3DF131E6205F34E63E42 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MKO project/Pods-MKO project-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5455810E1C663A82005E95E3 /* Sources */ = {
@@ -394,6 +469,7 @@
 		};
 		545581381C663A82005E95E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEEB74717200EE9C02F7FBEE /* Pods-MKO project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -406,6 +482,7 @@
 		};
 		545581391C663A82005E95E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12D660EF52BE2A14E140DBAF /* Pods-MKO project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -487,6 +564,7 @@
 				545581391C663A82005E95E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5455813A1C663A82005E95E3 /* Build configuration list for PBXNativeTarget "MKO projectTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +573,7 @@
 				5455813C1C663A82005E95E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5455813D1C663A82005E95E3 /* Build configuration list for PBXNativeTarget "MKO projectUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +582,7 @@
 				5455813F1C663A82005E95E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
