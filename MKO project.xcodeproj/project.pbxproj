@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05BAF02B08D2CECC7B256557 /* Pods_MKO_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */; };
+		5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCA51C6730BA00C09BF5 /* Tor functions.swift */; };
+		5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */; };
+		5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */; };
 		545581161C663A82005E95E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581151C663A82005E95E3 /* AppDelegate.swift */; };
 		545581181C663A82005E95E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581171C663A82005E95E3 /* ViewController.swift */; };
 		5455811A1C663A82005E95E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 545581191C663A82005E95E3 /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		12D660EF52BE2A14E140DBAF /* Pods-MKO project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKO project.release.xcconfig"; path = "Pods/Target Support Files/Pods-MKO project/Pods-MKO project.release.xcconfig"; sourceTree = "<group>"; };
+		5427CCA51C6730BA00C09BF5 /* Tor functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tor functions.swift"; sourceTree = "<group>"; };
+		5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Really bad file.swift"; sourceTree = "<group>"; };
+		5427CCB11C67ABA000C09BF5 /* MainModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainModel.xcdatamodel; sourceTree = "<group>"; };
 		545581121C663A82005E95E3 /* MKO project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MKO project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		545581151C663A82005E95E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		545581171C663A82005E95E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +98,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5427CCAF1C67A39600C09BF5 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */,
+				545581441C6643F0005E95E3 /* Classes and extensions.swift */,
+				5427CCA51C6730BA00C09BF5 /* Tor functions.swift */,
+			);
+			name = Extra;
+			sourceTree = "<group>";
+		};
 		545581091C663A82005E95E3 = {
 			isa = PBXGroup;
 			children = (
@@ -119,12 +135,13 @@
 			children = (
 				545581151C663A82005E95E3 /* AppDelegate.swift */,
 				545581171C663A82005E95E3 /* ViewController.swift */,
-				545581441C6643F0005E95E3 /* Classes and extensions.swift */,
+				5427CCAF1C67A39600C09BF5 /* Extra */,
 				545581191C663A82005E95E3 /* Assets.xcassets */,
 				5455811B1C663A82005E95E3 /* Main.storyboard */,
 				545581401C66425F005E95E3 /* config */,
 				545581421C664267005E95E3 /* NWSU.sh */,
 				5455811E1C663A82005E95E3 /* Info.plist */,
+				5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */,
 			);
 			path = "MKO project";
 			sourceTree = "<group>";
@@ -338,6 +355,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */,
+				5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */,
+				5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */,
 				545581181C663A82005E95E3 /* ViewController.swift in Sources */,
 				545581451C6643F0005E95E3 /* Classes and extensions.swift in Sources */,
 				545581161C663A82005E95E3 /* AppDelegate.swift in Sources */,
@@ -585,6 +605,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5427CCB11C67ABA000C09BF5 /* MainModel.xcdatamodel */,
+			);
+			currentVersion = 5427CCB11C67ABA000C09BF5 /* MainModel.xcdatamodel */;
+			path = MainModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5455810A1C663A82005E95E3 /* Project object */;
 }

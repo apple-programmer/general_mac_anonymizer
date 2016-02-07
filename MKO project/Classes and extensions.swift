@@ -63,6 +63,18 @@ func runCommand(command cmd : String) -> Array<String> {
     }
     
     task.launch()
+    let queue = dispatch_queue_create("com.domain.app.timer", nil)
+    let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, NSEC_PER_MSEC, NSEC_PER_MSEC) // every 60 seconds, with leeway of 1 second
+    dispatch_source_set_event_handler(timer) {
+        let data = handle.availableData
+        if data.length > 0 {
+            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
+                print("Got new output : \(output)")
+            }
+        }
+    }
+    dispatch_resume(timer)
     task.waitUntilExit()
     return result
 }
