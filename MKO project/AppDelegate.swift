@@ -13,16 +13,13 @@ import CoreData
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var socket : GCDAsyncSocket!
-
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        initPaths()
-        let wasLaunched = NSUserDefaults.standardUserDefaults().boolForKey("wasLaunched")
-        if !wasLaunched {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "wasLaunched")
-        }
+        runCommand(command: "killall tor ; killall privoxy ; killall brew")
+        let user = runCommand(command: "whoami")
+        print("I am \(user)")
+        NSUserDefaults.standardUserDefaults().setObject(user, forKey: "username")
         
-//        getPassword()
+        
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
@@ -32,7 +29,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName("AppTerminates", object: nil)
         runCommand(command: "rm .pw.sh")
         runCommand(command: "killall tor ; killall privoxy ; killall brew")
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "UserPassword")
     }
     
     lazy var applicationDocumentsDirectory: NSURL = {

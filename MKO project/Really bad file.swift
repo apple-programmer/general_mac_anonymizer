@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import CoreData
 
 func initPaths() {
     let delegate = NSApplication.sharedApplication().delegate as! AppDelegate

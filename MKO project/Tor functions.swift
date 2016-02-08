@@ -135,3 +135,53 @@ class Connection : GCDAsyncSocketDelegate {
         socket?.delegate = nil
     }
 }
+
+func installTor() {
+    if fileExists(pathToFile: "\(NSFileManager.defaultManager().currentDirectoryPath)//.pw.sh") {
+        runCommand(command: "\(askpass) sudo -Ak brew install tor")
+    }
+    else {
+        getPassword()
+        installTor()
+    }
+}
+
+func isTorInstalled() -> Bool {
+    let arr = runCommand(command: "command -v /usr/local/bin/tor")
+    return !arr.isEmpty
+}
+
+func configureTor() {
+    let path = "/usr/local/etc/tor/torrc"
+    runCommand(command: "\(askpass) sudo -Ak rm \(path)")
+    
+    let delegate = NSApplication.sharedApplication().delegate as! AppDelegate
+    let context = delegate.managedObjectContext
+    
+    let fetch = NSFetchRequest(entityName: "Tor")
+    
+    do {
+        let result = try context.executeFetchRequest(fetch)
+        let contents = result as! [NSManagedObject]
+        
+        var configFileContent = ""
+        
+        for obj in contents {
+            if let _string = obj.valueForKey("configContent") as? String {
+                configFileContent = _string
+            }
+        }
+        try configFileContent.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+    }
+    catch {
+        print("Error while reading core data and writing to file : \(error)")
+    }
+}
+
+func initTor() {
+    if !isTorInstalled() {
+        installTor()
+    }
+    configureTor()
+    launchTor()
+}

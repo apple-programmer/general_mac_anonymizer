@@ -11,14 +11,15 @@
 		5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCA51C6730BA00C09BF5 /* Tor functions.swift */; };
 		5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */; };
 		5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */; };
+		5427CCB41C68CFA900C09BF5 /* Privoxy functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB31C68CFA900C09BF5 /* Privoxy functions.swift */; };
+		5427CCB61C68D18900C09BF5 /* Brew functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB51C68D18900C09BF5 /* Brew functions.swift */; };
+		5427CCB81C68FCD600C09BF5 /* Network setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB71C68FCD600C09BF5 /* Network setup.swift */; };
 		545581161C663A82005E95E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581151C663A82005E95E3 /* AppDelegate.swift */; };
 		545581181C663A82005E95E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581171C663A82005E95E3 /* ViewController.swift */; };
 		5455811A1C663A82005E95E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 545581191C663A82005E95E3 /* Assets.xcassets */; };
 		5455811D1C663A82005E95E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5455811B1C663A82005E95E3 /* Main.storyboard */; };
 		545581281C663A82005E95E3 /* MKO_projectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581271C663A82005E95E3 /* MKO_projectTests.swift */; };
 		545581331C663A82005E95E3 /* MKO_projectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581321C663A82005E95E3 /* MKO_projectUITests.swift */; };
-		545581411C66425F005E95E3 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 545581401C66425F005E95E3 /* config */; };
-		545581431C664267005E95E3 /* NWSU.sh in Resources */ = {isa = PBXBuildFile; fileRef = 545581421C664267005E95E3 /* NWSU.sh */; };
 		545581451C6643F0005E95E3 /* Classes and extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545581441C6643F0005E95E3 /* Classes and extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,9 @@
 		5427CCA51C6730BA00C09BF5 /* Tor functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tor functions.swift"; sourceTree = "<group>"; };
 		5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Really bad file.swift"; sourceTree = "<group>"; };
 		5427CCB11C67ABA000C09BF5 /* MainModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainModel.xcdatamodel; sourceTree = "<group>"; };
+		5427CCB31C68CFA900C09BF5 /* Privoxy functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Privoxy functions.swift"; sourceTree = "<group>"; };
+		5427CCB51C68D18900C09BF5 /* Brew functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Brew functions.swift"; sourceTree = "<group>"; };
+		5427CCB71C68FCD600C09BF5 /* Network setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network setup.swift"; sourceTree = "<group>"; };
 		545581121C663A82005E95E3 /* MKO project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MKO project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		545581151C663A82005E95E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		545581171C663A82005E95E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,8 +60,6 @@
 		5455812E1C663A82005E95E3 /* MKO projectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MKO projectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		545581321C663A82005E95E3 /* MKO_projectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKO_projectUITests.swift; sourceTree = "<group>"; };
 		545581341C663A82005E95E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		545581401C66425F005E95E3 /* config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
-		545581421C664267005E95E3 /* NWSU.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = NWSU.sh; sourceTree = "<group>"; };
 		545581441C6643F0005E95E3 /* Classes and extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Classes and extensions.swift"; sourceTree = "<group>"; };
 		80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MKO_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEEB74717200EE9C02F7FBEE /* Pods-MKO project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKO project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MKO project/Pods-MKO project.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +106,9 @@
 				5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */,
 				545581441C6643F0005E95E3 /* Classes and extensions.swift */,
 				5427CCA51C6730BA00C09BF5 /* Tor functions.swift */,
+				5427CCB31C68CFA900C09BF5 /* Privoxy functions.swift */,
+				5427CCB71C68FCD600C09BF5 /* Network setup.swift */,
+				5427CCB51C68D18900C09BF5 /* Brew functions.swift */,
 			);
 			name = Extra;
 			sourceTree = "<group>";
@@ -138,8 +143,6 @@
 				5427CCAF1C67A39600C09BF5 /* Extra */,
 				545581191C663A82005E95E3 /* Assets.xcassets */,
 				5455811B1C663A82005E95E3 /* Main.storyboard */,
-				545581401C66425F005E95E3 /* config */,
-				545581421C664267005E95E3 /* NWSU.sh */,
 				5455811E1C663A82005E95E3 /* Info.plist */,
 				5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */,
 			);
@@ -280,8 +283,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5455811A1C663A82005E95E3 /* Assets.xcassets in Resources */,
-				545581431C664267005E95E3 /* NWSU.sh in Resources */,
-				545581411C66425F005E95E3 /* config in Resources */,
 				5455811D1C663A82005E95E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,9 +356,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5427CCB61C68D18900C09BF5 /* Brew functions.swift in Sources */,
+				5427CCB81C68FCD600C09BF5 /* Network setup.swift in Sources */,
 				5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */,
 				5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */,
 				5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */,
+				5427CCB41C68CFA900C09BF5 /* Privoxy functions.swift in Sources */,
 				545581181C663A82005E95E3 /* ViewController.swift in Sources */,
 				545581451C6643F0005E95E3 /* Classes and extensions.swift in Sources */,
 				545581161C663A82005E95E3 /* AppDelegate.swift in Sources */,

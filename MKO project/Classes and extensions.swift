@@ -8,9 +8,10 @@
 
 import Cocoa
 import Foundation
+import CoreData
 
-func runCommand(command cmd : String) -> Array<String> {
-    var result : Array<String> = []
+func runCommand(command cmd : String) -> String {
+    var result = ""
     
     let task = NSTask()
     task.launchPath = "/bin/bash"
@@ -32,7 +33,7 @@ func runCommand(command cmd : String) -> Array<String> {
         if data.length > 0 {
             if let output = String(data: data, encoding: NSUTF8StringEncoding) {
                 print("Output : \(output)")
-                result.append(output)
+                result += "\(output)\n"
             }
         }
         else {
@@ -55,7 +56,7 @@ func runCommand(command cmd : String) -> Array<String> {
         if (data.length > 0) {
             if let output = String(data: data, encoding: NSUTF8StringEncoding) {
                 print("Error : \(output)")
-                result.append(output)
+                result += "\(output)\n"
             
                 NSNotificationCenter.defaultCenter().removeObserver(errObserver)
             }
@@ -63,18 +64,6 @@ func runCommand(command cmd : String) -> Array<String> {
     }
     
     task.launch()
-    let queue = dispatch_queue_create("com.domain.app.timer", nil)
-    let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
-    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, NSEC_PER_MSEC, NSEC_PER_MSEC) // every 60 seconds, with leeway of 1 second
-    dispatch_source_set_event_handler(timer) {
-        let data = handle.availableData
-        if data.length > 0 {
-            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-                print("Got new output : \(output)")
-            }
-        }
-    }
-    dispatch_resume(timer)
     task.waitUntilExit()
     return result
 }
@@ -105,7 +94,6 @@ func getPassword() -> String {
             }
             else {
                 check = true
-                NSUserDefaults.standardUserDefaults().setObject(pass, forKey: "UserPassword")
             }
         }
         else {
@@ -114,4 +102,24 @@ func getPassword() -> String {
         }
     }
     return pass;
+}
+
+func setStringToCoreData(content cont : String, entityName ent : String, attributeName attr : String) {
+    let delegate = NSApplication.sharedApplication().delegate as! AppDelegate
+    let context = delegate.managedObjectContext
+    
+    if let entity = NSEntityDescription.entityForName(ent, inManagedObjectContext: context) {
+        let object = NSManagedObject(entity: entity, insertIntoManagedObjectContext: context)
+        object.setValue(cont, forKey: attr)
+        do {
+            try context.save()
+        }
+        catch {
+            print("Error \"\(error as NSError)\" while saving attribute \(attr) to entity \(ent)")
+        }
+    }
+}
+
+func fileExists(pathToFile path : String) -> Bool {
+    return NSFileManager.defaultManager().fileExistsAtPath(path)
 }

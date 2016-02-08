@@ -2,10 +2,12 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
     <entity name="Privoxy" syncable="YES">
         <attribute name="configContent" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="configPath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="launchString" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Tor" syncable="YES">
+        <attribute name="configContent" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Privoxy" positionX="-36" positionY="9" width="128" height="90"/>
+        <element name="Privoxy" positionX="-128" positionY="81" width="128" height="58"/>
+        <element name="Tor" positionX="9" positionY="81" width="128" height="58"/>
     </elements>
 </model>
