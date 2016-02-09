@@ -123,3 +123,20 @@ func setStringToCoreData(content cont : String, entityName ent : String, attribu
 func fileExists(pathToFile path : String) -> Bool {
     return NSFileManager.defaultManager().fileExistsAtPath(path)
 }
+
+func randomString() -> String {
+    
+    let len = random() % 30 + 15
+    
+    let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    
+    let randomString : NSMutableString = NSMutableString(capacity: len)
+    
+    for (var i=0; i < len; i++){
+        let length = UInt32 (letters.length)
+        let rand = arc4random_uniform(length)
+        randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+    }
+    
+    return randomString as String
+}

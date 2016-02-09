@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		05BAF02B08D2CECC7B256557 /* Pods_MKO_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */; };
+		540756071C69D0E0001F2126 /* privoxyConfig.txt in Resources */ = {isa = PBXBuildFile; fileRef = 540756061C69D0E0001F2126 /* privoxyConfig.txt */; };
 		5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCA51C6730BA00C09BF5 /* Tor functions.swift */; };
 		5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */; };
 		5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		12D660EF52BE2A14E140DBAF /* Pods-MKO project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKO project.release.xcconfig"; path = "Pods/Target Support Files/Pods-MKO project/Pods-MKO project.release.xcconfig"; sourceTree = "<group>"; };
+		540756061C69D0E0001F2126 /* privoxyConfig.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = privoxyConfig.txt; sourceTree = "<group>"; };
 		5427CCA51C6730BA00C09BF5 /* Tor functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tor functions.swift"; sourceTree = "<group>"; };
 		5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Really bad file.swift"; sourceTree = "<group>"; };
 		5427CCB11C67ABA000C09BF5 /* MainModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainModel.xcdatamodel; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				545581191C663A82005E95E3 /* Assets.xcassets */,
 				5455811B1C663A82005E95E3 /* Main.storyboard */,
 				5455811E1C663A82005E95E3 /* Info.plist */,
+				540756061C69D0E0001F2126 /* privoxyConfig.txt */,
 				5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */,
 			);
 			path = "MKO project";
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5455811A1C663A82005E95E3 /* Assets.xcassets in Resources */,
+				540756071C69D0E0001F2126 /* privoxyConfig.txt in Resources */,
 				5455811D1C663A82005E95E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

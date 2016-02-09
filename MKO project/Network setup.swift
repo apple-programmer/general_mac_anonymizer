@@ -24,9 +24,15 @@ func createLocation() {
 }
 
 func initNetwork() {
+    getPassword()
     createLocation()
     configureProxy()
     initBrew()
     initTor()
     initPrivoxy()
+}
+
+func deinitNetwork() {
+    runCommand(command: "\(askpass) sudo -Ak networksetup -deletelocation \"Secret Location\"")
+    runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"Main\"")
 }

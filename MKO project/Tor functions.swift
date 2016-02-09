@@ -10,11 +10,12 @@ import Foundation
 import Cocoa
 import CocoaAsyncSocket
 
-func launchTor() {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+func launchTor(hashedPassword hash : String) {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
         let task = NSTask()
         task.launchPath = "/bin/bash"
-        task.arguments = (["-c", "/usr/local/bin/tor"])
+        print("Hashed password : \(hash)")
+        task.arguments = (["-c", "/usr/local/bin/tor HashedControlPassword \(hash)"])
         
         let pipe = NSPipe()
         task.standardOutput = pipe
@@ -26,19 +27,19 @@ func launchTor() {
         let errHandle = errPipe.fileHandleForReading
         errHandle.waitForDataInBackgroundAndNotify()
         
-        var startObserver : NSObjectProtocol!
-        startObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification, object: nil, queue: nil) { notification -> Void in
-            let data = handle.availableData
-            if data.length > 0 {
-                if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-                    print("Output : \(output)")
-                }
-            }
-            else {
-                print("EOF on stdout")
-                NSNotificationCenter.defaultCenter().removeObserver(startObserver)
-            }
-        }
+//        var startObserver : NSObjectProtocol!
+//        startObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification, object: nil, queue: nil) { notification -> Void in
+//            let data = handle.availableData
+//            if data.length > 0 {
+//                if let output = String(data: data, encoding: NSUTF8StringEncoding) {
+//                    print("Output : \(output)")
+//                }
+//            }
+//            else {
+//                print("EOF on stdout")
+//                NSNotificationCenter.defaultCenter().removeObserver(startObserver)
+//            }
+//        }
         
         var endObserver : NSObjectProtocol!
         endObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
@@ -66,18 +67,6 @@ func launchTor() {
             notification -> Void in
             task.terminate()
         }
-        let queue = dispatch_queue_create("com.domain.app.timer", nil)
-        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
-        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, NSEC_PER_SEC, 1 * NSEC_PER_SEC) // every 60 seconds, with leeway of 1 second
-        dispatch_source_set_event_handler(timer) {
-            let data = handle.availableData
-            if data.length > 0 {
-                if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-                    print("Got new output : \(output)")
-                }
-            }
-        }
-        dispatch_resume(timer)
         task.waitUntilExit()
     }
 }
@@ -107,7 +96,7 @@ class Connection : GCDAsyncSocketDelegate {
     @objc func socketDidDisconnect(sock: GCDAsyncSocket!, withError err: NSError!) {
         if err.userInfo["NSLocalizedDescription"] as? String == "Connection refused" {
             print("Tor is not launched!")
-            launchTor()
+            initTor()
         }
     }
     
@@ -118,7 +107,7 @@ class Connection : GCDAsyncSocketDelegate {
     
     @objc func socket(sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
         print("Connected to host \(host) on port \(port)")
-        var request = "AUTHENTICATE \"1728390\"\n"
+        var request = "AUTHENTICATE \"\(NSUserDefaults.standardUserDefaults().objectForKey("torControlPassword") as! String)\"\n"
         var data = request.dataUsingEncoding(NSUTF8StringEncoding)
         socket!.writeData(data, withTimeout: -1.0, tag: 0)
         socket!.readDataWithTimeout(-1.0, tag: 0)
@@ -178,10 +167,23 @@ func configureTor() {
     }
 }
 
+func generateHash() -> String {
+    let passwd = randomString()
+    NSUserDefaults.standardUserDefaults().setObject(passwd, forKey: "torControlPassword")
+    let output = runCommand(command: "/usr/local/bin/tor --hash-password \(passwd)").componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+    for line in output {
+        if line.hasPrefix("16:") {
+            return line
+        }
+    }
+    return generateHash()
+}
+
 func initTor() {
     if !isTorInstalled() {
         installTor()
     }
     configureTor()
-    launchTor()
+    let hash = generateHash()
+    launchTor(hashedPassword: hash)
 }

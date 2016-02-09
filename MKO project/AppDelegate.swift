@@ -15,15 +15,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         runCommand(command: "killall tor ; killall privoxy ; killall brew")
-        let user = runCommand(command: "whoami")
+        let user = runCommand(command: "whoami").componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).first!
         print("I am \(user)")
         NSUserDefaults.standardUserDefaults().setObject(user, forKey: "username")
-        
-        
+        readAndSetData()
+//        getString()
+}
+    
+
+    
+    func readAndSetData() {
+        do {
+            let s = try String(contentsOfFile: NSBundle.mainBundle().pathForResource("config", ofType: "txt")!, encoding: NSUTF8StringEncoding)
+            print(s)
+//            setStringToCoreData(content: s, entityName: "Privoxy", attributeName: "configContent")
+            
+        }
+        catch {
+            print("Error \(error as NSError) while reading from file")
+        }
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         self.saveContext()
+        
+        deinitNetwork()
         
         // Will be caught in launchTor() func
         NSNotificationCenter.defaultCenter().postNotificationName("AppTerminates", object: nil)

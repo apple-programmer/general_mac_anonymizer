@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 func launchPrivoxy() -> String {
-    return runCommand(command: "/usr/local/sbin/privoxy --user \(NSUserDefaults.standardUserDefaults().stringForKey("username")) /usr/local/etc/privoxy/config")
+    return runCommand(command: "/usr/local/sbin/privoxy --user \(NSUserDefaults.standardUserDefaults().objectForKey("username") as! String) /usr/local/etc/privoxy/config")
 }
 
 func configurePrivoxy() {
@@ -30,8 +30,10 @@ func configurePrivoxy() {
         for obj in contents {
             if let _string = obj.valueForKey("configContent") as? String {
                 configFileContent = _string
+                print(_string)
             }
         }
+        print(configFileContent)
         try configFileContent.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
     }
     catch {
@@ -41,6 +43,7 @@ func configurePrivoxy() {
 
 func installPrivoxy() {
     if fileExists(pathToFile: "\(NSFileManager.defaultManager().currentDirectoryPath)//.pw.sh") {
+        print("Installing Privoxy")
         runCommand(command: "\(askpass) sudo -Ak brew install privoxy")
     }
     else {
@@ -50,9 +53,9 @@ func installPrivoxy() {
 }
 
 func initPrivoxy() {
-    if !fileExists(pathToFile: "/usr/local/etc/privoxy/config") {
+    if !fileExists(pathToFile: "/usr/local/sbin/privoxy") {
         installPrivoxy()
     }
     configurePrivoxy()
-    launchPrivoxy()
+    print("Launched privoxy : \(launchPrivoxy())")
 }
