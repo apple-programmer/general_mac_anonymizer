@@ -10,7 +10,7 @@ import Cocoa
 import Foundation
 import CoreData
 
-func runCommand(command cmd : String) -> String {
+func runCommand(command cmd : String, waitForCompletion wait : Bool = true) -> String {
     var result = ""
     
     let task = NSTask()
@@ -19,52 +19,60 @@ func runCommand(command cmd : String) -> String {
     
     let pipe = NSPipe()
     task.standardOutput = pipe
+    task.standardError = pipe
     let handle = pipe.fileHandleForReading
-    handle.waitForDataInBackgroundAndNotify()
+//    handle.waitForDataInBackgroundAndNotify()
     
-    let errPipe = NSPipe()
-    task.standardError = errPipe
-    let errHandle = errPipe.fileHandleForReading
-    errHandle.waitForDataInBackgroundAndNotify()
-    
-    var startObserver : NSObjectProtocol!
-    startObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification, object: nil, queue: nil) { notification -> Void in
-        let data = handle.availableData
-        if data.length > 0 {
-            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-                print("Output : \(output)")
-                result += "\(output)\n"
-            }
-        }
-        else {
-            print("EOF on stdout")
-            NSNotificationCenter.defaultCenter().removeObserver(startObserver)
-        }
-    }
-    
-    var endObserver : NSObjectProtocol!
-    endObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
-        notification -> Void in
-        print("Task terminated with code \(task.terminationStatus)")
-        NSNotificationCenter.defaultCenter().removeObserver(endObserver)
-    }
-    
-    var errObserver : NSObjectProtocol!
-    errObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
-        notification -> Void in
-        let data = errHandle.availableData
-        if (data.length > 0) {
-            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-                print("Error : \(output)")
-                result += "\(output)\n"
-            
-                NSNotificationCenter.defaultCenter().removeObserver(errObserver)
-            }
-        }
-    }
+//    let errPipe = NSPipe()
+//    task.standardError = errPipe
+//    let errHandle = errPipe.fileHandleForReading
+//    errHandle.waitForDataInBackgroundAndNotify()
+//    
+//    var startObserver : NSObjectProtocol!
+//    startObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification, object: nil, queue: nil) { notification -> Void in
+//        let data = handle.availableData
+//        if data.length > 0 {
+//            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
+//                print("Output : \(output)")
+//                result += "\(output)\n"
+//            }
+//        }
+//        else {
+//            print("EOF on stdout")
+//            NSNotificationCenter.defaultCenter().removeObserver(startObserver)
+//        }
+//    }
+//    
+//    var endObserver : NSObjectProtocol!
+//    endObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
+//        notification -> Void in
+//        print("Task \"\(cmd)\" terminated with code \(task.terminationStatus)")
+//        NSNotificationCenter.defaultCenter().removeObserver(endObserver)
+//    }
+//    
+//    var errObserver : NSObjectProtocol!
+//    errObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
+//        notification -> Void in
+//        let data = errHandle.availableData
+//        if (data.length > 0) {
+//            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
+//                print("Error : \(output)")
+//                result += "\(output)\n"
+//            
+//                NSNotificationCenter.defaultCenter().removeObserver(errObserver)
+//            }
+//        }
+//    }
     
     task.launch()
-    task.waitUntilExit()
+    
+    let data = NSMutableData()
+    
+    while task.running {
+        data.appendData(handle.availableData)
+    }
+    result = String(data: data, encoding: NSUTF8StringEncoding)!
+    print(result)
     return result
 }
 
@@ -102,22 +110,6 @@ func getPassword() -> String {
         }
     }
     return pass;
-}
-
-func setStringToCoreData(content cont : String, entityName ent : String, attributeName attr : String) {
-    let delegate = NSApplication.sharedApplication().delegate as! AppDelegate
-    let context = delegate.managedObjectContext
-    
-    if let entity = NSEntityDescription.entityForName(ent, inManagedObjectContext: context) {
-        let object = NSManagedObject(entity: entity, insertIntoManagedObjectContext: context)
-        object.setValue(cont, forKey: attr)
-        do {
-            try context.save()
-        }
-        catch {
-            print("Error \"\(error as NSError)\" while saving attribute \(attr) to entity \(ent)")
-        }
-    }
 }
 
 func fileExists(pathToFile path : String) -> Bool {

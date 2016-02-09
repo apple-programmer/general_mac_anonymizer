@@ -14,7 +14,6 @@ func launchTor(hashedPassword hash : String) {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
         let task = NSTask()
         task.launchPath = "/bin/bash"
-        print("Hashed password : \(hash)")
         task.arguments = (["-c", "/usr/local/bin/tor HashedControlPassword \(hash)"])
         
         let pipe = NSPipe()
@@ -44,7 +43,7 @@ func launchTor(hashedPassword hash : String) {
         var endObserver : NSObjectProtocol!
         endObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
             notification -> Void in
-            print("Task terminated with code \(task.terminationStatus)")
+            print("Task \"Tor\" terminated with code \(task.terminationStatus)")
             NSNotificationCenter.defaultCenter().removeObserver(endObserver)
         }
         
@@ -61,12 +60,29 @@ func launchTor(hashedPassword hash : String) {
             }
         }
         
-        task.launch()
-        
-        _ = NSNotificationCenter.defaultCenter().addObserverForName("AppTerminates", object: nil, queue: nil) {
+        let terminateObserver : NSObjectProtocol!
+        terminateObserver = NSNotificationCenter.defaultCenter().addObserverForName("AppTerminates", object: nil, queue: nil) {
             notification -> Void in
+            print("Terminating...")
             task.terminate()
+            
+            runCommand(command: "\(askpass) sudo -Ak killall privoxy", waitForCompletion: false)
+            
+            print("privoxy terminated")
+            
+            do {
+                try NSFileManager.defaultManager().removeItemAtPath("\(NSFileManager.defaultManager().currentDirectoryPath)//.pw.sh")
+                print("File deleted")
+            }
+            catch {
+                print("Error while deleting file \(error as NSError)")
+            }
+            print("Password file deleted")
+            isTorLaunched = false
         }
+        
+        task.launch()
+        isTorLaunched = true
         task.waitUntilExit()
     }
 }
@@ -141,34 +157,22 @@ func isTorInstalled() -> Bool {
 }
 
 func configureTor() {
-    let path = "/usr/local/etc/tor/torrc"
-    runCommand(command: "\(askpass) sudo -Ak rm \(path)")
-    
-    let delegate = NSApplication.sharedApplication().delegate as! AppDelegate
-    let context = delegate.managedObjectContext
-    
-    let fetch = NSFetchRequest(entityName: "Tor")
-    
+    let configPath = "/usr/local/etc/tor/torrc"
+    let newConfigPath = NSBundle.mainBundle().pathForResource("torConfig", ofType: "txt")
+    runCommand(command: "\(askpass) sudo -Ak rm \(configPath)")
     do {
-        let result = try context.executeFetchRequest(fetch)
-        let contents = result as! [NSManagedObject]
-        
-        var configFileContent = ""
-        
-        for obj in contents {
-            if let _string = obj.valueForKey("configContent") as? String {
-                configFileContent = _string
-            }
-        }
-        try configFileContent.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+        let content = try String(contentsOfFile: newConfigPath!, encoding: NSUTF8StringEncoding)
+        try content.writeToFile(configPath, atomically: true, encoding: NSUTF8StringEncoding)
     }
     catch {
-        print("Error while reading core data and writing to file : \(error)")
+        print("Error \(error as NSError) while configuring Tor")
     }
+    
 }
 
 func generateHash() -> String {
     let passwd = randomString()
+    print("Session password : \(passwd)")
     NSUserDefaults.standardUserDefaults().setObject(passwd, forKey: "torControlPassword")
     let output = runCommand(command: "/usr/local/bin/tor --hash-password \(passwd)").componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
     for line in output {

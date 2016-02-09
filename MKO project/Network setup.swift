@@ -12,9 +12,11 @@ import Cocoa
 func configureProxy() {
     let services = runCommand(command: "networksetup -listallnetworkservices | grep -vw \"An asterisk\"").componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
     for serv in services {
-        runCommand(command: "\(askpass) sudo -Ak networksetup -setsecurewebproxy \"\(serv)\" 127.0.0.1 8118")
-        runCommand(command: "\(askpass) sudo -Ak networksetup -setwebproxy \"\(serv)\" 127.0.0.1 8118")
-        runCommand(command: "\(askpass) sudo -Ak networksetup -setsocksfirewallproxy \"\(serv)\" 127.0.0.1 9050")
+        if !serv.isEmpty {
+            runCommand(command: "\(askpass) sudo -Ak networksetup -setsecurewebproxy \"\(serv)\" 127.0.0.1 8118")
+            runCommand(command: "\(askpass) sudo -Ak networksetup -setwebproxy \"\(serv)\" 127.0.0.1 8118")
+            runCommand(command: "\(askpass) sudo -Ak networksetup -setsocksfirewallproxy \"\(serv)\" 127.0.0.1 9050")
+        }
     }
 }
 
@@ -27,12 +29,17 @@ func initNetwork() {
     getPassword()
     createLocation()
     configureProxy()
-    initBrew()
-    initTor()
+    if !isTorInstalled() || !isPrivoxyInstalled() {
+        initBrew()
+    }
     initPrivoxy()
+    initTor()
 }
 
 func deinitNetwork() {
-    runCommand(command: "\(askpass) sudo -Ak networksetup -deletelocation \"Secret Location\"")
-    runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"Main\"")
+    runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"Main\"", waitForCompletion: true)
+    print("Switched location")
+    runCommand(command: "\(askpass) sudo -Ak networksetup -deletelocation \"Secret Location\"", waitForCompletion: false)
+    print("Deleted location")
+    
 }

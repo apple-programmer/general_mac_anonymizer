@@ -15,6 +15,12 @@ class ViewController: NSViewController {
         super.viewDidLoad()
     }
     
+    @IBAction func configureAllButtonClicked(sender: NSButton) {
+        initNetwork()
+    }
+    override func viewDidAppear() {
+        super.viewDidAppear()
+    }
 
     override var representedObject: AnyObject? {
         didSet {

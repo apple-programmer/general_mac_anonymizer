@@ -10,35 +10,26 @@ import Foundation
 import Cocoa
 
 func launchPrivoxy() -> String {
-    return runCommand(command: "/usr/local/sbin/privoxy --user \(NSUserDefaults.standardUserDefaults().objectForKey("username") as! String) /usr/local/etc/privoxy/config")
+    return runCommand(command: "/usr/local/sbin/privoxy /usr/local/etc/privoxy/config")
 }
 
 func configurePrivoxy() {
-    let path = "/usr/local/etc/privoxy/config"
-    runCommand(command: "\(askpass) sudo -Ak rm \(path)")
-    let delegate = NSApplication.sharedApplication().delegate as! AppDelegate
-    let context = delegate.managedObjectContext
-    
-    let fetch = NSFetchRequest(entityName: "Privoxy")
-    
+    let configPath = "/usr/local/etc/privoxy/config"
+    let newConfigPath = NSBundle.mainBundle().pathForResource("privoxyConfig", ofType: "txt")
+    runCommand(command: "\(askpass) sudo -Ak rm \(configPath)")
     do {
-        let result = try context.executeFetchRequest(fetch)
-        let contents = result as! [NSManagedObject]
-
-        var configFileContent = ""
-        
-        for obj in contents {
-            if let _string = obj.valueForKey("configContent") as? String {
-                configFileContent = _string
-                print(_string)
-            }
-        }
-        print(configFileContent)
-        try configFileContent.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+        let content = try String(contentsOfFile: newConfigPath!, encoding: NSUTF8StringEncoding)
+        try content.writeToFile(configPath, atomically: true, encoding: NSUTF8StringEncoding)
+        print("configuration done")
     }
     catch {
-        print("Error while reading core data and writing to file : \(error)")
+        print("Error \(error as NSError) while configuring Privoxy")
     }
+    
+}
+
+func isPrivoxyInstalled() -> Bool {
+    return fileExists(pathToFile: "/usr/local/sbin/privoxy")
 }
 
 func installPrivoxy() {
@@ -53,9 +44,10 @@ func installPrivoxy() {
 }
 
 func initPrivoxy() {
-    if !fileExists(pathToFile: "/usr/local/sbin/privoxy") {
+    if !isPrivoxyInstalled() {
         installPrivoxy()
     }
     configurePrivoxy()
+    print("Launching Privoxy")
     print("Launched privoxy : \(launchPrivoxy())")
 }
