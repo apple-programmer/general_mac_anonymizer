@@ -21,49 +21,6 @@ func runCommand(command cmd : String, waitForCompletion wait : Bool = true) -> S
     task.standardOutput = pipe
     task.standardError = pipe
     let handle = pipe.fileHandleForReading
-//    handle.waitForDataInBackgroundAndNotify()
-    
-//    let errPipe = NSPipe()
-//    task.standardError = errPipe
-//    let errHandle = errPipe.fileHandleForReading
-//    errHandle.waitForDataInBackgroundAndNotify()
-//    
-//    var startObserver : NSObjectProtocol!
-//    startObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification, object: nil, queue: nil) { notification -> Void in
-//        let data = handle.availableData
-//        if data.length > 0 {
-//            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-//                print("Output : \(output)")
-//                result += "\(output)\n"
-//            }
-//        }
-//        else {
-//            print("EOF on stdout")
-//            NSNotificationCenter.defaultCenter().removeObserver(startObserver)
-//        }
-//    }
-//    
-//    var endObserver : NSObjectProtocol!
-//    endObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
-//        notification -> Void in
-//        print("Task \"\(cmd)\" terminated with code \(task.terminationStatus)")
-//        NSNotificationCenter.defaultCenter().removeObserver(endObserver)
-//    }
-//    
-//    var errObserver : NSObjectProtocol!
-//    errObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
-//        notification -> Void in
-//        let data = errHandle.availableData
-//        if (data.length > 0) {
-//            if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-//                print("Error : \(output)")
-//                result += "\(output)\n"
-//            
-//                NSNotificationCenter.defaultCenter().removeObserver(errObserver)
-//            }
-//        }
-//    }
-    
     task.launch()
     
     let data = NSMutableData()
@@ -94,6 +51,7 @@ func getPassword() -> String {
         if response == NSAlertFirstButtonReturn {
             print("User agreed")
             pass = textField.stringValue
+            NSThread.sleepForTimeInterval(1.0)
             runCommand(command: "echo $'#!/bin/bash\necho \(pass)' > .pw.sh")
             runCommand(command: "chmod 755 .pw.sh")
             let result = runCommand(command: "\(askpass) sudo -Ak true")

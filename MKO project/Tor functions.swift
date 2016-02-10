@@ -10,80 +10,61 @@ import Foundation
 import Cocoa
 import CocoaAsyncSocket
 
-func launchTor(hashedPassword hash : String) {
+func launchTorImpr(hashedPassword hash : String) {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+        () -> Void in
         let task = NSTask()
         task.launchPath = "/bin/bash"
         task.arguments = (["-c", "/usr/local/bin/tor HashedControlPassword \(hash)"])
         
         let pipe = NSPipe()
-        task.standardOutput = pipe
-        let handle = pipe.fileHandleForReading
-        handle.waitForDataInBackgroundAndNotify()
+        let error = NSPipe()
         
-        let errPipe = NSPipe()
-        task.standardError = errPipe
-        let errHandle = errPipe.fileHandleForReading
+        task.standardOutput = pipe
+        task.standardError = error
+        
+        let handle = pipe.fileHandleForReading
+        let errHandle = error.fileHandleForReading
         errHandle.waitForDataInBackgroundAndNotify()
         
-//        var startObserver : NSObjectProtocol!
-//        startObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification, object: nil, queue: nil) { notification -> Void in
-//            let data = handle.availableData
-//            if data.length > 0 {
-//                if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-//                    print("Output : \(output)")
-//                }
-//            }
-//            else {
-//                print("EOF on stdout")
-//                NSNotificationCenter.defaultCenter().removeObserver(startObserver)
-//            }
-//        }
         
-        var endObserver : NSObjectProtocol!
-        endObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
-            notification -> Void in
-            print("Task \"Tor\" terminated with code \(task.terminationStatus)")
-            NSNotificationCenter.defaultCenter().removeObserver(endObserver)
-        }
-        
-        var errObserver : NSObjectProtocol!
-        errObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
+        var observer : NSObjectProtocol!
+        observer = NSNotificationCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
             notification -> Void in
             let data = errHandle.availableData
-            if (data.length > 0) {
-                if let output = String(data: data, encoding: NSUTF8StringEncoding) {
-                    print("Error : \(output)")
-                    
-                    NSNotificationCenter.defaultCenter().removeObserver(errObserver)
+            if data.length > 0 {
+                if let errorStr = String(data: data, encoding: NSUTF8StringEncoding) {
+                    print("Tor error accured : \(errorStr)")
+                    isTorLaunched = false
                 }
             }
-        }
-        
-        let terminateObserver : NSObjectProtocol!
-        terminateObserver = NSNotificationCenter.defaultCenter().addObserverForName("AppTerminates", object: nil, queue: nil) {
-            notification -> Void in
-            print("Terminating...")
-            task.terminate()
-            
-            runCommand(command: "\(askpass) sudo -Ak killall privoxy", waitForCompletion: false)
-            
-            print("privoxy terminated")
-            
-            do {
-                try NSFileManager.defaultManager().removeItemAtPath("\(NSFileManager.defaultManager().currentDirectoryPath)//.pw.sh")
-                print("File deleted")
-            }
-            catch {
-                print("Error while deleting file \(error as NSError)")
-            }
-            print("Password file deleted")
-            isTorLaunched = false
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
         }
         
         task.launch()
         isTorLaunched = true
-        task.waitUntilExit()
+        
+        var data = NSData()
+        
+        while task.running {
+            data = handle.availableData
+            let output = String(data: data, encoding: NSUTF8StringEncoding)!
+            
+            print("Tor output : \(output)")
+            if output.hasSuffix("Done\n") {
+                break
+            }
+        }
+        
+        while isTorLaunched {
+            if !task.running {
+                break
+            }
+            NSThread.sleepForTimeInterval(0.5)
+        }
+        task.terminate()
+        print("Tor terminated")
+        NSNotificationCenter().postNotificationName("TorTerminated", object: nil)
     }
 }
 
@@ -189,5 +170,5 @@ func initTor() {
     }
     configureTor()
     let hash = generateHash()
-    launchTor(hashedPassword: hash)
+    launchTorImpr(hashedPassword: hash)
 }

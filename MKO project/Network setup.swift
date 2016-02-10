@@ -27,13 +27,20 @@ func createLocation() {
 
 func initNetwork() {
     getPassword()
-    createLocation()
-    configureProxy()
-    if !isTorInstalled() || !isPrivoxyInstalled() {
-        initBrew()
-    }
-    initPrivoxy()
-    initTor()
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+        createLocation()
+        configureProxy()
+    })
+    dispatch_sync(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
+        if !isTorInstalled() || !isPrivoxyInstalled() {
+            initBrew()
+        }
+    })
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        initPrivoxy()
+        initTor()
+    })
+    
 }
 
 func deinitNetwork() {

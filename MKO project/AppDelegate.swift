@@ -11,8 +11,6 @@ import CocoaAsyncSocket
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
-    var isTerminating = false
 
     func applicationWillFinishLaunching(notification: NSNotification) {
         runCommand(command: "killall tor ; killall privoxy ; killall brew")
@@ -22,12 +20,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        NSNotificationCenter.defaultCenter().addObserverForName("Termination", object: nil, queue: NSOperationQueue.currentQueue(), usingBlock: {
-            notification -> Void in
-            if !self.isTerminating {
-                self.applicationTerminates()
-            }
-        })
         
     }
 
@@ -40,30 +32,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationTerminates() {
-//        isTerminating = true
-//
-        deinitNetwork()
-//
-        print("network deinitiated")
-//
-//        while isTorLaunched {
-//            
-//        }
-//        
-////        // Will be caught in launchTor() func
-        NSNotificationCenter.defaultCenter().postNotificationName("AppTerminates", object: nil)
-        print("so what?")
-        while isTorLaunched {
-            
-        }
         
-        print("So cloooose")
+        deinitNetwork()
+        print("network deinitiated")
+        
+        isTorLaunched = false
         
         NSApplication.sharedApplication().replyToApplicationShouldTerminate(true)
     }
     
     func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             () -> Void in
                 self.applicationTerminates()
             })
