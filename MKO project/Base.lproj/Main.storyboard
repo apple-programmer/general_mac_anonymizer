@@ -106,29 +106,109 @@
             <point key="canvasLocation" x="502" y="-76.5"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="Ra2-7N-0mG">
+            <objects>
+                <viewController id="m6g-5w-sf0" sceneMemberID="viewController">
+                    <view key="view" id="2Mf-Ck-KMh">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="CmD-H2-75V" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1361" y="82"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tVh-Tv-qc2">
+            <objects>
+                <viewController id="6Zn-BK-5v8" sceneMemberID="viewController">
+                    <view key="view" id="RfR-c7-mmj">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="Q7W-B3-nZI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1361" y="443"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MKO_project" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
+                    <view key="view" id="m2S-Jp-Qdl" customClass="CustomView" customModule="MKO_project" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="311"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WaO-Y1-4fR">
-                                <rect key="frame" x="132" y="180" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hRv-dx-Wfm">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="configureAllButtonClicked:" target="XfG-lQ-9wD" id="blU-Po-svt"/>
-                                </connections>
-                            </button>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="zRd-lQ-4e4" customClass="CustomView" customModule="MKO_project" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="311"/>
+                                <subviews>
+                                    <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mBK-tU-Nv1">
+                                        <rect key="frame" x="275" y="77" width="192" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Request new Tor identity" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SSq-mK-b92">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newIdentityButtonClicked:" target="XfG-lQ-9wD" id="D7v-4s-qr1"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WaO-Y1-4fR">
+                                        <rect key="frame" x="14" y="77" width="192" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Start network" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hRv-dx-Wfm">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="configureAllButtonClicked:" target="XfG-lQ-9wD" id="blU-Po-svt"/>
+                                        </connections>
+                                    </button>
+                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGX-cf-p9R">
+                                        <rect key="frame" x="20" y="139" width="440" height="152"/>
+                                        <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="mzT-Yn-7IB">
+                                            <rect key="frame" x="1" y="1" width="438" height="150"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textView ambiguous="YES" editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="LDh-JS-Bn9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="438" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="minSize" width="438" height="150"/>
+                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <size key="minSize" width="438" height="150"/>
+                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="cR3-nq-f33">
+                                            <rect key="frame" x="1" y="135" width="438" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0zK-fS-HUY">
+                                            <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                </subviews>
+                            </customView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="zRd-lQ-4e4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="A9C-Rs-u7A"/>
+                            <constraint firstItem="zRd-lQ-4e4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Zmd-IT-eW2"/>
+                            <constraint firstAttribute="trailing" secondItem="zRd-lQ-4e4" secondAttribute="trailing" id="hFP-XG-p7z"/>
+                            <constraint firstAttribute="bottom" secondItem="zRd-lQ-4e4" secondAttribute="bottom" id="quH-Ow-dwl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="customView" destination="zRd-lQ-4e4" id="5wJ-yQ-kvg"/>
+                        <outlet property="newIdentityButton" destination="mBK-tU-Nv1" id="RZi-K8-Yp4"/>
+                        <outlet property="textView" destination="LDh-JS-Bn9" id="e79-xa-wRd"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99" y="319.5"/>
+            <point key="canvasLocation" x="155" y="309.5"/>
         </scene>
     </scenes>
 </document>

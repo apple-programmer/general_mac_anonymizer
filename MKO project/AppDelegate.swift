@@ -19,24 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSUserDefaults.standardUserDefaults().setObject(user, forKey: "username")
     }
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        
-    }
-
-    func applicationWillTerminate(aNotification: NSNotification) {
-        
-    }
-    
-    func applicationWillHide(notification: NSNotification) {
-        print("Is HIDING!")
-    }
-    
     func applicationTerminates() {
         
         deinitNetwork()
         print("network deinitiated")
-        
-        isTorLaunched = false
         
         NSApplication.sharedApplication().replyToApplicationShouldTerminate(true)
     }

@@ -16,19 +16,47 @@ func configureProxy() {
             runCommand(command: "\(askpass) sudo -Ak networksetup -setsecurewebproxy \"\(serv)\" 127.0.0.1 8118")
             runCommand(command: "\(askpass) sudo -Ak networksetup -setwebproxy \"\(serv)\" 127.0.0.1 8118")
             runCommand(command: "\(askpass) sudo -Ak networksetup -setsocksfirewallproxy \"\(serv)\" 127.0.0.1 9050")
+            printToGUI("Configured proxy on service \(serv)")
         }
     }
 }
 
-func createLocation() {
-    runCommand(command: "\(askpass) sudo -Ak networksetup -createlocation \"Secret Location\" populate")
-    runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"Secret Location\"")
+func getCurrentLocation() {
+    let output = runCommand(command: "\(askpass) sudo -Ak networksetup -getcurrentlocation").componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).first
+    if output == "Automatic" || output == "Авто" {
+        createLocation(locationName: "Main Location")
+        switchToLocation(locationName: "Main Location")
+        runCommand(command: "\(askpass) sudo -Ak -deletelocation \"\(output)\"")
+        NSUserDefaults.standardUserDefaults().setObject("Main Location", forKey: "OldLocation")
+    }
+    else {
+        NSUserDefaults.standardUserDefaults().setObject(output, forKey: "OldLocation")
+    }
+}
+
+func createLocation(locationName name : String = "Secret Location") {
+    runCommand(command: "\(askpass) sudo -Ak networksetup -createlocation \"\(name)\" populate")
+    print("Location created")
+    printToGUI("Created location \(name)")
+}
+
+func switchToLocation(locationName name : String = "Secret Location") {
+    let result = runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"\(name)\"")
+    if result.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).last!.hasSuffix("is not a network location name.") {
+        printToGUI("Could not find old location")
+        createLocation(locationName: name)
+        switchToLocation(locationName: name)
+    }
+    print("Switched to location \(name)")
+    printToGUI("Switched to location \(name)")
 }
 
 func initNetwork() {
     getPassword()
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+        getCurrentLocation()
         createLocation()
+        switchToLocation()
         configureProxy()
     })
     dispatch_sync(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
@@ -44,9 +72,12 @@ func initNetwork() {
 }
 
 func deinitNetwork() {
-    runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"Main\"", waitForCompletion: true)
-    print("Switched location")
-    runCommand(command: "\(askpass) sudo -Ak networksetup -deletelocation \"Secret Location\"", waitForCompletion: false)
+    switchToLocation(locationName: NSUserDefaults.standardUserDefaults().objectForKey("OldLocation") as! String)
+    runCommand(command: "\(askpass) sudo -Ak networksetup -deletelocation \"Secret Location\"")
     print("Deleted location")
+    printToGUI("Deleted location \"Secret Location\"")
+    isTorLaunched = false
+    runCommand(command: "killall privoxy")
+    printToGUI("Killed Privoxy")
     
 }

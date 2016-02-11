@@ -49,5 +49,7 @@ func initPrivoxy() {
     }
     configurePrivoxy()
     print("Launching Privoxy")
-    print("Launched privoxy : \(launchPrivoxy())")
+    printToGUI("Launching Privoxy")
+    launchPrivoxy()
+    printToGUI("Launched Privoxy")
 }

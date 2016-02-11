@@ -10,7 +10,7 @@ import Cocoa
 import Foundation
 import CoreData
 
-func runCommand(command cmd : String, waitForCompletion wait : Bool = true) -> String {
+func runCommand(command cmd : String) -> String {
     var result = ""
     
     let task = NSTask()
@@ -29,7 +29,11 @@ func runCommand(command cmd : String, waitForCompletion wait : Bool = true) -> S
         data.appendData(handle.availableData)
     }
     result = String(data: data, encoding: NSUTF8StringEncoding)!
-    print(result)
+    
+    if !result.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).isEmpty {
+        print("Output for \(cmd) : \(result)")
+    }
+    
     return result
 }
 
@@ -51,22 +55,25 @@ func getPassword() -> String {
         if response == NSAlertFirstButtonReturn {
             print("User agreed")
             pass = textField.stringValue
-            NSThread.sleepForTimeInterval(1.0)
             runCommand(command: "echo $'#!/bin/bash\necho \(pass)' > .pw.sh")
             runCommand(command: "chmod 755 .pw.sh")
             let result = runCommand(command: "\(askpass) sudo -Ak true")
             if (!result.isEmpty) {
                 mess = "Password incorrect"
+                print("User entered incorrect password")
             }
             else {
                 check = true
             }
         }
         else {
-            print("User refused")
+            print("User refused to provide password. Exiting")
             exit(0);
         }
     }
+    
+    print("Password confirmed")
+    
     return pass;
 }
 
@@ -89,4 +96,11 @@ func randomString() -> String {
     }
     
     return randomString as String
+}
+
+func printToGUI(content : String) {
+    dispatch_async(dispatch_get_main_queue(), {
+        () -> Void in
+        NSNotificationCenter.defaultCenter().postNotificationName("NewConsoleOuput", object: nil, userInfo: ["output" : content])
+    })
 }

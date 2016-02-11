@@ -11,7 +11,6 @@
 		540756071C69D0E0001F2126 /* privoxyConfig.txt in Resources */ = {isa = PBXBuildFile; fileRef = 540756061C69D0E0001F2126 /* privoxyConfig.txt */; };
 		540756091C69D206001F2126 /* torConfig.txt in Resources */ = {isa = PBXBuildFile; fileRef = 540756081C69D206001F2126 /* torConfig.txt */; };
 		5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCA51C6730BA00C09BF5 /* Tor functions.swift */; };
-		5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */; };
 		5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB01C67ABA000C09BF5 /* MainModel.xcdatamodeld */; };
 		5427CCB41C68CFA900C09BF5 /* Privoxy functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB31C68CFA900C09BF5 /* Privoxy functions.swift */; };
 		5427CCB61C68D18900C09BF5 /* Brew functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCB51C68D18900C09BF5 /* Brew functions.swift */; };
@@ -47,7 +46,6 @@
 		540756061C69D0E0001F2126 /* privoxyConfig.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = privoxyConfig.txt; sourceTree = "<group>"; };
 		540756081C69D206001F2126 /* torConfig.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = torConfig.txt; sourceTree = "<group>"; };
 		5427CCA51C6730BA00C09BF5 /* Tor functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tor functions.swift"; sourceTree = "<group>"; };
-		5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Really bad file.swift"; sourceTree = "<group>"; };
 		5427CCB11C67ABA000C09BF5 /* MainModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainModel.xcdatamodel; sourceTree = "<group>"; };
 		5427CCB31C68CFA900C09BF5 /* Privoxy functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Privoxy functions.swift"; sourceTree = "<group>"; };
 		5427CCB51C68D18900C09BF5 /* Brew functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Brew functions.swift"; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 		5427CCAF1C67A39600C09BF5 /* Extra */ = {
 			isa = PBXGroup;
 			children = (
-				5427CCAD1C67A38C00C09BF5 /* Really bad file.swift */,
 				545581441C6643F0005E95E3 /* Classes and extensions.swift */,
 				5427CCA51C6730BA00C09BF5 /* Tor functions.swift */,
 				5427CCB31C68CFA900C09BF5 /* Privoxy functions.swift */,
@@ -375,7 +372,6 @@
 				5427CCB61C68D18900C09BF5 /* Brew functions.swift in Sources */,
 				5427CCB81C68FCD600C09BF5 /* Network setup.swift in Sources */,
 				5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */,
-				5427CCAE1C67A38C00C09BF5 /* Really bad file.swift in Sources */,
 				5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */,
 				5427CCB41C68CFA900C09BF5 /* Privoxy functions.swift in Sources */,
 				545581181C663A82005E95E3 /* ViewController.swift in Sources */,

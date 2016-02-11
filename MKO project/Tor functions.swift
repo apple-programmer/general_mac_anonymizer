@@ -41,6 +41,7 @@ func launchTorImpr(hashedPassword hash : String) {
             NSNotificationCenter.defaultCenter().removeObserver(observer)
         }
         
+        printToGUI("Launching TOR:")
         task.launch()
         isTorLaunched = true
         
@@ -51,7 +52,10 @@ func launchTorImpr(hashedPassword hash : String) {
             let output = String(data: data, encoding: NSUTF8StringEncoding)!
             
             print("Tor output : \(output)")
+            printToGUI(output)
+            
             if output.hasSuffix("Done\n") {
+                printToGUI("TOR launched successfully!")
                 break
             }
         }
@@ -64,6 +68,7 @@ func launchTorImpr(hashedPassword hash : String) {
         }
         task.terminate()
         print("Tor terminated")
+        printToGUI("Tor terminated")
         NSNotificationCenter().postNotificationName("TorTerminated", object: nil)
     }
 }
@@ -115,6 +120,7 @@ class Connection : GCDAsyncSocketDelegate {
         request = "QUIT\n"
         data = request.dataUsingEncoding(NSUTF8StringEncoding)
         socket!.writeData(data, withTimeout: -1.0, tag: 0)
+        printToGUI("Got new identity")
     }
     
     deinit {
