@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -92,7 +93,7 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DqT-1n-Ilh">
                                 <rect key="frame" x="312" y="13" width="111" height="11"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version: 0.0.1" id="saK-ps-UY6">
+                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version: 0.0.3" id="saK-ps-UY6">
                                     <font key="font" metaFont="miniSystem"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -105,31 +106,106 @@
             </objects>
             <point key="canvasLocation" x="502" y="-76.5"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Ra2-7N-0mG">
+        <!--Settings View Controller-->
+        <scene sceneID="k1M-Iv-Itf">
             <objects>
-                <viewController id="m6g-5w-sf0" sceneMemberID="viewController">
-                    <view key="view" id="2Mf-Ck-KMh">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                <viewController id="R7I-YG-u9a" customClass="SettingsViewController" customModule="MKO_project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="yJ4-TG-azE">
+                        <rect key="frame" x="0.0" y="0.0" width="576" height="191"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box canDrawConcurrently="YES" fixedFrame="YES" title="Proxy settings" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="hxy-wc-Xr9">
+                                <rect key="frame" x="17" y="57" width="542" height="114"/>
+                                <view key="contentView" id="cFV-PG-2Tq">
+                                    <rect key="frame" x="1" y="1" width="540" height="92"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yMk-Lx-Kgb">
+                                            <rect key="frame" x="143" y="61" width="96" height="22"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1eC-6h-vT0">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <action selector="torControlPortEntered:" target="R7I-YG-u9a" id="tLR-s9-aoY"/>
+                                            </connections>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vjf-Sp-pYq">
+                                            <rect key="frame" x="143" y="29" width="96" height="22"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="QQP-H1-5bp">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <action selector="webProxyEntered:" target="R7I-YG-u9a" id="Qio-jg-3MO"/>
+                                            </connections>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWK-pK-GYI">
+                                            <rect key="frame" x="18" y="64" width="112" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tor Control Port : " id="h60-uX-TP9">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5w-Cw-iE0">
+                                            <rect key="frame" x="256" y="64" width="266" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Possible values : from 9051 to 9252" id="tZP-Li-Alb">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBS-9a-B2b">
+                                            <rect key="frame" x="18" y="32" width="112" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Web proxy port :" id="zB8-bz-JqD">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xJZ-CA-KJ5">
+                                            <rect key="frame" x="256" y="32" width="266" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Possible values : from 8100 to 8200" id="76C-0j-yCX">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <font key="titleFont" metaFont="system" size="15"/>
+                            </box>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8x-NS-oK4">
+                                <rect key="frame" x="419" y="13" width="143" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset to defaults" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wbQ-eM-exb">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZUf-7K-zl5">
+                                <rect key="frame" x="516" y="157" width="25" height="25"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PnS-pS-9dD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="torPortField" destination="yMk-Lx-Kgb" id="Wtx-V5-E0F"/>
+                        <outlet property="torPossibleValue" destination="y5w-Cw-iE0" id="FE5-b2-Z3i"/>
+                        <outlet property="webPossibleValue" destination="xJZ-CA-KJ5" id="6Bf-qT-ciK"/>
+                        <outlet property="webProxyPortField" destination="Vjf-Sp-pYq" id="a8H-Z6-H35"/>
+                    </connections>
                 </viewController>
-                <customObject id="CmD-H2-75V" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="aZU-No-yFx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1361" y="82"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="tVh-Tv-qc2">
-            <objects>
-                <viewController id="6Zn-BK-5v8" sceneMemberID="viewController">
-                    <view key="view" id="RfR-c7-mmj">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="Q7W-B3-nZI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1361" y="443"/>
+            <point key="canvasLocation" x="798" y="213.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">

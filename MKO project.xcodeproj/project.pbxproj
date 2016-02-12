@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		05BAF02B08D2CECC7B256557 /* Pods_MKO_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FA71036BEED151491FAD83 /* Pods_MKO_project.framework */; };
+		540032791C6DB6B80045C941 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540032781C6DB6B80045C941 /* SettingsViewController.swift */; };
 		540756071C69D0E0001F2126 /* privoxyConfig.txt in Resources */ = {isa = PBXBuildFile; fileRef = 540756061C69D0E0001F2126 /* privoxyConfig.txt */; };
 		540756091C69D206001F2126 /* torConfig.txt in Resources */ = {isa = PBXBuildFile; fileRef = 540756081C69D206001F2126 /* torConfig.txt */; };
 		5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427CCA51C6730BA00C09BF5 /* Tor functions.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		12D660EF52BE2A14E140DBAF /* Pods-MKO project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKO project.release.xcconfig"; path = "Pods/Target Support Files/Pods-MKO project/Pods-MKO project.release.xcconfig"; sourceTree = "<group>"; };
+		540032781C6DB6B80045C941 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		540756061C69D0E0001F2126 /* privoxyConfig.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = privoxyConfig.txt; sourceTree = "<group>"; };
 		540756081C69D206001F2126 /* torConfig.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = torConfig.txt; sourceTree = "<group>"; };
 		5427CCA51C6730BA00C09BF5 /* Tor functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tor functions.swift"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				545581151C663A82005E95E3 /* AppDelegate.swift */,
+				540032781C6DB6B80045C941 /* SettingsViewController.swift */,
 				545581171C663A82005E95E3 /* ViewController.swift */,
 				5427CCAF1C67A39600C09BF5 /* Extra */,
 				545581191C663A82005E95E3 /* Assets.xcassets */,
@@ -372,6 +375,7 @@
 				5427CCB61C68D18900C09BF5 /* Brew functions.swift in Sources */,
 				5427CCB81C68FCD600C09BF5 /* Network setup.swift in Sources */,
 				5427CCB21C67ABA000C09BF5 /* MainModel.xcdatamodeld in Sources */,
+				540032791C6DB6B80045C941 /* SettingsViewController.swift in Sources */,
 				5427CCA61C6730BA00C09BF5 /* Tor functions.swift in Sources */,
 				5427CCB41C68CFA900C09BF5 /* Privoxy functions.swift in Sources */,
 				545581181C663A82005E95E3 /* ViewController.swift in Sources */,
