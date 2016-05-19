@@ -41,11 +41,13 @@ func createLocation(locationName name : String = "Secret Location") {
 }
 
 func switchToLocation(locationName name : String = "Secret Location") {
+    var name = name
     let result = runCommand(command: "\(askpass) sudo -Ak networksetup -switchtolocation \"\(name)\"")
-    if result.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).last!.hasSuffix("is not a network location name.") {
+    if result.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).contains("** Error: The parameters were not valid.") {
         printToGUI("Could not find old location")
-        createLocation(locationName: name)
-        switchToLocation(locationName: name)
+        createLocation(locationName: "Main Location")
+        switchToLocation(locationName: "Main Location")
+        name = "Main Location"
     }
     print("Switched to location \(name)")
     printToGUI("Switched to location \(name)")
@@ -72,11 +74,16 @@ func initNetwork() {
 }
 
 func deinitNetwork() {
-    switchToLocation(locationName: NSUserDefaults.standardUserDefaults().objectForKey("OldLocation") as! String)
+    var location = NSUserDefaults.standardUserDefaults().objectForKey("OldLocation") as! String
+    if location == "Secret Location" {
+        location = "Main Location"
+    }
+    switchToLocation(locationName: location)
     runCommand(command: "\(askpass) sudo -Ak networksetup -deletelocation \"Secret Location\"")
     print("Deleted location")
     printToGUI("Deleted location \"Secret Location\"")
     isTorLaunched = false
+    runCommand(command: "killall tor")
     runCommand(command: "killall privoxy")
     printToGUI("Killed Privoxy")
     

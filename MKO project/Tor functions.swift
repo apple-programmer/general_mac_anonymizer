@@ -16,6 +16,7 @@ func launchTorImpr(hashedPassword hash : String) {
         let task = NSTask()
         task.launchPath = "/bin/bash"
         task.arguments = (["-c", "/usr/local/bin/tor HashedControlPassword \(hash)"])
+        task.currentDirectoryPath = "~/"
         
         let pipe = NSPipe()
         let error = NSPipe()
@@ -27,6 +28,8 @@ func launchTorImpr(hashedPassword hash : String) {
         let errHandle = error.fileHandleForReading
         errHandle.waitForDataInBackgroundAndNotify()
         
+        
+        isTorLaunched = true
         
         var observer : NSObjectProtocol!
         observer = NSNotificationCenter().addObserverForName(NSTaskDidTerminateNotification, object: nil, queue: nil) {
@@ -42,34 +45,36 @@ func launchTorImpr(hashedPassword hash : String) {
         }
         
         printToGUI("Launching TOR:")
-        task.launch()
-        isTorLaunched = true
-        
-        var data = NSData()
-        
-        while task.running {
-            data = handle.availableData
-            let output = String(data: data, encoding: NSUTF8StringEncoding)!
+        if isTorLaunched {
+            task.launch()
             
-            print("Tor output : \(output)")
-            printToGUI(output)
+            var data = NSData()
             
-            if output.hasSuffix("Done\n") {
-                printToGUI("TOR launched successfully!")
-                break
+            while task.running && isTorLaunched {
+                data = handle.availableData
+                let output = String(data: data, encoding: NSUTF8StringEncoding)!
+                
+                print("Tor output : \(output)")
+                printToGUI(output)
+                
+                if output.hasSuffix("Done\n") {
+                    printToGUI("TOR launched successfully!")
+                    readyToGO = true
+                    break
+                }
             }
-        }
-        
-        while isTorLaunched {
-            if !task.running {
-                break
+            
+            while isTorLaunched {
+                if !task.running {
+                    break
+                }
+                NSThread.sleepForTimeInterval(0.5)
             }
-            NSThread.sleepForTimeInterval(0.5)
+            task.terminate()
+            print("Tor terminated")
+            printToGUI("Tor terminated")
+            NSNotificationCenter().postNotificationName("TorTerminated", object: nil)
         }
-        task.terminate()
-        print("Tor terminated")
-        printToGUI("Tor terminated")
-        NSNotificationCenter().postNotificationName("TorTerminated", object: nil)
     }
 }
 

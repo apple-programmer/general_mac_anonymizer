@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         deinitNetwork()
         print("network deinitiated")
         
+        runCommand(command: "\(askpass) sudo -Ak rm .pw.sh")
+        
         NSApplication.sharedApplication().replyToApplicationShouldTerminate(true)
     }
     
@@ -41,5 +43,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 let askpass = "export SUDO_ASKPASS=.pw.sh ; SUDO_ASKPASS=.pw.sh ;"
 var isTorLaunched = false
-
+var readyToGO = true
 

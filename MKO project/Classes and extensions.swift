@@ -16,6 +16,7 @@ func runCommand(command cmd : String) -> String {
     let task = NSTask()
     task.launchPath = "/bin/bash"
     task.arguments = (["-c", cmd])
+    task.currentDirectoryPath = "~/"
     
     let pipe = NSPipe()
     task.standardOutput = pipe
@@ -37,9 +38,20 @@ func runCommand(command cmd : String) -> String {
     return result
 }
 
-func getPassword() -> String {
+func checkPassword() -> Bool {
+    let result = runCommand(command: "\(askpass) sudo -Ak true")
+    return result.isEmpty
+}
+
+func getPassword() {
+    
+    if checkPassword() {
+        return
+    }
+    
     var check = false
     var pass = "", mess = "Enter password"
+    
     while (!check) {
         
         let alert = NSAlert()
@@ -73,8 +85,6 @@ func getPassword() -> String {
     }
     
     print("Password confirmed")
-    
-    return pass;
 }
 
 func fileExists(pathToFile path : String) -> Bool {
@@ -89,7 +99,7 @@ func randomString() -> String {
     
     let randomString : NSMutableString = NSMutableString(capacity: len)
     
-    for (var i=0; i < len; i++){
+    for _ in 0 ..< len {
         let length = UInt32 (letters.length)
         let rand = arc4random_uniform(length)
         randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))

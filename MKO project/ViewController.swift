@@ -53,14 +53,17 @@ class ViewController: NSViewController {
         progressIndicatior.startAnimation(self)
         customView.ignoresUser = true
         if sender.title == "Start network" {
+            readyToGO = false;
             sender.title = "Stop network"
             initNetwork()
             newIdentityButton.hidden = false
         }
         else {
-            sender.title = "Start network"
-            deinitNetwork()
-            newIdentityButton.hidden = true
+            if readyToGO {
+                sender.title = "Start network"
+                deinitNetwork()
+                newIdentityButton.hidden = true
+            }
         }
         progressIndicatior.stopAnimation(self)
         progressIndicatior.hidden = true
