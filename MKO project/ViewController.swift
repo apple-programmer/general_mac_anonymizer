@@ -8,6 +8,9 @@
 
 import Cocoa
 import CocoaAsyncSocket
+import ServiceManagement
+import SecurityFoundation
+import LocalAuthentication
 
 class CustomView: NSView {
     
@@ -71,7 +74,8 @@ class ViewController: NSViewController {
     }
     override func viewDidAppear() {
         super.viewDidAppear()
-            NSNotificationCenter.defaultCenter().addObserverForName("NewConsoleOuput", object: nil, queue: nil, usingBlock: {
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("NewConsoleOuput", object: nil, queue: nil, usingBlock: {
             notification -> Void in
                 if let info = notification.userInfo {
                     if let output = info["output"] as? String {

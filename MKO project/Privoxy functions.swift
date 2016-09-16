@@ -13,17 +13,19 @@ func launchPrivoxy() -> String {
     return runCommand(command: "/usr/local/sbin/privoxy /usr/local/etc/privoxy/config")
 }
 
-func configurePrivoxy() {
+func configurePrivoxy(resetExisting : Bool = false) {
     let configPath = "/usr/local/etc/privoxy/config"
-    let newConfigPath = NSBundle.mainBundle().pathForResource("privoxyConfig", ofType: "txt")
-    runCommand(command: "\(askpass) sudo -Ak rm \(configPath)")
-    do {
-        let content = try String(contentsOfFile: newConfigPath!, encoding: NSUTF8StringEncoding)
-        try content.writeToFile(configPath, atomically: true, encoding: NSUTF8StringEncoding)
-        print("configuration done")
-    }
-    catch {
-        print("Error \(error as NSError) while configuring Privoxy")
+    if resetExisting || !fileExists(pathToFile: configPath) {
+        let newConfigPath = NSBundle.mainBundle().pathForResource("privoxyConfig", ofType: "txt")
+        runCommand(command: "\(askpass) sudo -Ak rm \(configPath)")
+        do {
+            let content = try String(contentsOfFile: newConfigPath!, encoding: NSUTF8StringEncoding)
+            try content.writeToFile(configPath, atomically: true, encoding: NSUTF8StringEncoding)
+            print("configuration done")
+        }
+        catch {
+            print("Error \(error as NSError) while configuring Privoxy")
+        }
     }
     
 }

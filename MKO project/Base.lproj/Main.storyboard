@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
@@ -21,6 +21,12 @@
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                                 <segue destination="0PM-Cd-MAR" kind="modal" id="mMi-2t-WeZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Qro-7N-JdU"/>
+                                        <menuItem title="Preferences" keyEquivalent="," id="Yxy-gk-qzz">
+                                            <connections>
+                                                <segue destination="R7I-YG-u9a" kind="modal" id="Dak-Rw-fIc"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -111,47 +117,25 @@
             <objects>
                 <viewController id="R7I-YG-u9a" customClass="SettingsViewController" customModule="MKO_project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="yJ4-TG-azE">
-                        <rect key="frame" x="0.0" y="0.0" width="576" height="191"/>
+                        <rect key="frame" x="0.0" y="0.0" width="576" height="258"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box canDrawConcurrently="YES" fixedFrame="YES" title="Proxy settings" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="hxy-wc-Xr9">
-                                <rect key="frame" x="17" y="57" width="542" height="114"/>
+                                <rect key="frame" x="17" y="57" width="542" height="181"/>
                                 <view key="contentView" id="cFV-PG-2Tq">
-                                    <rect key="frame" x="1" y="1" width="540" height="92"/>
+                                    <rect key="frame" x="1" y="1" width="540" height="159"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yMk-Lx-Kgb">
-                                            <rect key="frame" x="143" y="61" width="96" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1eC-6h-vT0">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                            <connections>
-                                                <action selector="torControlPortEntered:" target="R7I-YG-u9a" id="tLR-s9-aoY"/>
-                                            </connections>
-                                        </textField>
-                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vjf-Sp-pYq">
-                                            <rect key="frame" x="143" y="29" width="96" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="QQP-H1-5bp">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                            <connections>
-                                                <action selector="webProxyEntered:" target="R7I-YG-u9a" id="Qio-jg-3MO"/>
-                                            </connections>
-                                        </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWK-pK-GYI">
-                                            <rect key="frame" x="18" y="64" width="112" height="17"/>
+                                            <rect key="frame" x="18" y="82" width="112" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tor Control Port : " id="h60-uX-TP9">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5w-Cw-iE0">
-                                            <rect key="frame" x="256" y="64" width="266" height="17"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5w-Cw-iE0">
+                                            <rect key="frame" x="256" y="82" width="266" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Possible values : from 9051 to 9252" id="tZP-Li-Alb">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -159,16 +143,75 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBS-9a-B2b">
-                                            <rect key="frame" x="18" y="32" width="112" height="17"/>
+                                            <rect key="frame" x="18" y="50" width="112" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Web proxy port :" id="zB8-bz-JqD">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xJZ-CA-KJ5">
-                                            <rect key="frame" x="256" y="32" width="266" height="17"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xJZ-CA-KJ5">
+                                            <rect key="frame" x="256" y="50" width="266" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Possible values : from 8100 to 8200" id="76C-0j-yCX">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X0E-CN-kV4">
+                                            <rect key="frame" x="74" y="18" width="393" height="18"/>
+                                            <buttonCell key="cell" type="check" title="I want to use this computer's proxy on other machines in LAN" bezelStyle="regularSquare" imagePosition="left" inset="2" id="AeC-r6-vb1">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-VJ-ehJ">
+                                            <rect key="frame" x="154" y="79" width="96" height="22"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="7aw-MP-sby">
+                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="6Wz-PG-kfJ">
+                                                    <real key="minimum" value="9051"/>
+                                                    <real key="maximum" value="9252"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fz2-mH-70Q">
+                                            <rect key="frame" x="154" y="47" width="96" height="22"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="lNQ-9J-Yd1">
+                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="uSJ-bf-UXG">
+                                                    <real key="minimum" value="8100"/>
+                                                    <real key="maximum" value="8200"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AA0-BE-YbJ">
+                                            <rect key="frame" x="154" y="111" width="96" height="22"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="PVM-hW-Vuo">
+                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="UTh-tl-zrh">
+                                                    <real key="minimum" value="9000"/>
+                                                    <real key="maximum" value="9050"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQE-e8-g3o">
+                                            <rect key="frame" x="18" y="114" width="112" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tor listening port:" id="c4S-pI-r9x">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kac-cE-NiS">
+                                            <rect key="frame" x="256" y="114" width="266" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Possible values : from 9000 to 9050" id="8a6-ca-EDU">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -181,45 +224,57 @@
                                 <font key="titleFont" metaFont="system" size="15"/>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8x-NS-oK4">
-                                <rect key="frame" x="419" y="13" width="143" height="32"/>
+                                <rect key="frame" x="329" y="13" width="143" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset to defaults" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wbQ-eM-exb">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="setDefaultValues:" target="R7I-YG-u9a" id="rwU-Cb-EQJ"/>
+                                </connections>
                             </button>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZUf-7K-zl5">
-                                <rect key="frame" x="516" y="157" width="25" height="25"/>
-                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PnS-pS-9dD">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qPi-mc-rll">
+                                <rect key="frame" x="492" y="13" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZZU-sB-yiV">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="saveSettings:" target="R7I-YG-u9a" id="pp6-9D-ZJ8"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="torPortField" destination="yMk-Lx-Kgb" id="Wtx-V5-E0F"/>
+                        <outlet property="torListeningPort" destination="AA0-BE-YbJ" id="g6Y-Ar-Q5B"/>
+                        <outlet property="torListeningValue" destination="Kac-cE-NiS" id="C63-gk-Bod"/>
+                        <outlet property="torPortField" destination="WnW-VJ-ehJ" id="NCZ-kI-hiX"/>
                         <outlet property="torPossibleValue" destination="y5w-Cw-iE0" id="FE5-b2-Z3i"/>
+                        <outlet property="useInLANCheckBox" destination="X0E-CN-kV4" id="Nav-lT-aA4"/>
                         <outlet property="webPossibleValue" destination="xJZ-CA-KJ5" id="6Bf-qT-ciK"/>
-                        <outlet property="webProxyPortField" destination="Vjf-Sp-pYq" id="a8H-Z6-H35"/>
+                        <outlet property="webProxyPortField" destination="Fz2-mH-70Q" id="SS3-7I-6JU"/>
                     </connections>
                 </viewController>
                 <customObject id="aZU-No-yFx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="760" y="276.5"/>
+            <point key="canvasLocation" x="760" y="310"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MKO_project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl" customClass="CustomView" customModule="MKO_project" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="311"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="247"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="zRd-lQ-4e4" customClass="CustomView" customModule="MKO_project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="311"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="247"/>
                                 <subviews>
                                     <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mBK-tU-Nv1">
-                                        <rect key="frame" x="275" y="77" width="192" height="32"/>
+                                        <rect key="frame" x="275" y="13" width="192" height="32"/>
                                         <buttonCell key="cell" type="push" title="Request new Tor identity" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SSq-mK-b92">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -229,7 +284,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WaO-Y1-4fR">
-                                        <rect key="frame" x="14" y="77" width="192" height="32"/>
+                                        <rect key="frame" x="14" y="13" width="192" height="32"/>
                                         <buttonCell key="cell" type="push" title="Start network" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hRv-dx-Wfm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -239,7 +294,7 @@
                                         </connections>
                                     </button>
                                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGX-cf-p9R">
-                                        <rect key="frame" x="20" y="139" width="440" height="152"/>
+                                        <rect key="frame" x="20" y="75" width="440" height="152"/>
                                         <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="mzT-Yn-7IB">
                                             <rect key="frame" x="1" y="1" width="438" height="150"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -284,7 +339,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="304.5"/>
+            <point key="canvasLocation" x="195" y="408.5"/>
         </scene>
     </scenes>
 </document>

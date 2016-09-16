@@ -8,10 +8,13 @@
 
 import Cocoa
 import CocoaAsyncSocket
+import LocalAuthentication
+import Security
+import ServiceManagement
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     func applicationWillFinishLaunching(notification: NSNotification) {
         runCommand(command: "killall tor ; killall privoxy ; killall brew")
         let user = runCommand(command: "whoami").componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()).first!

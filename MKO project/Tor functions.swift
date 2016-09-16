@@ -148,16 +148,18 @@ func isTorInstalled() -> Bool {
     return !arr.isEmpty
 }
 
-func configureTor() {
+func configureTor(resetExisting : Bool = false) {
     let configPath = "/usr/local/etc/tor/torrc"
-    let newConfigPath = NSBundle.mainBundle().pathForResource("torConfig", ofType: "txt")
-    runCommand(command: "\(askpass) sudo -Ak rm \(configPath)")
-    do {
-        let content = try String(contentsOfFile: newConfigPath!, encoding: NSUTF8StringEncoding)
-        try content.writeToFile(configPath, atomically: true, encoding: NSUTF8StringEncoding)
-    }
-    catch {
-        print("Error \(error as NSError) while configuring Tor")
+    if !fileExists(pathToFile: configPath) || resetExisting {
+        let newConfigPath = NSBundle.mainBundle().pathForResource("torConfig", ofType: "txt")
+        runCommand(command: "\(askpass) sudo -Ak rm \(configPath)")
+        do {
+            let content = try String(contentsOfFile: newConfigPath!, encoding: NSUTF8StringEncoding)
+            try content.writeToFile(configPath, atomically: true, encoding: NSUTF8StringEncoding)
+        }
+        catch {
+            print("Error \(error as NSError) while configuring Tor")
+        }
     }
     
 }
